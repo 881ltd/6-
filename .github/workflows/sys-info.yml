@@ -1,0 +1,29 @@
+name: Linux System Info
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  system-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kernel version
+        run: uname -a
+
+      - name: Linux distribution
+        run: cat /etc/os-release
+
+      - name: Current user and working directory
+        run: |
+          whoami
+          pwd
+
+      - name: GitHub context
+        env:
+          GH_ACTOR: ${{ github.actor }}
+          GH_REPOSITORY: ${{ github.repository }}
+        run: |
+          echo "GitHub actor: $GH_ACTOR"
+          echo "GitHub repository: $GH_REPOSITORY"
